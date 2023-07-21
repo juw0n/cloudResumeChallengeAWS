@@ -2,6 +2,7 @@
 This is the repo for my cloudResume challenge using AWS cloud
 
 The Cloud Resume Challenge - AWS according to cloudresumechallenge.dev
+
 Step 1: Certification
 Your resume needs to have the AWS Cloud Practitioner certification on it. 
 
