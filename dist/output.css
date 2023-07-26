@@ -534,6 +534,15 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.border-l-2 {
+  border-left-width: 2px;
+}
+
+.border-lime-50 {
+  --tw-border-opacity: 1;
+  border-color: rgb(247 254 231 / var(--tw-border-opacity));
+}
+
 .bg-green-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(134 239 172 / var(--tw-bg-opacity));
@@ -551,4 +560,20 @@ video {
 
 .bg-center {
   background-position: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-extrabold {
+  font-weight: 800;
+}
+
+.font-light {
+  font-weight: 300;
 }
