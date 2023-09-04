@@ -50,3 +50,39 @@ resource "aws_lambda_function_url" "viewCounter_function_url" {
     max_age           = 86400
   }
 }
+
+# creating aws iam policy for the function url
+resource "aws_iam_policy" "iam_policy_for_cloudresume" {
+  name        = "terraform_aws_iam_policy_for_cloudresume"
+  path        = "/"
+  description = "AWS iam Policy for managing the lambda function url"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        "Action" : [
+          "logs: CreateLogGroup",
+          "logs: CreateLogStream",
+          "logs: PutLogEvents"
+        ],
+        "Resource" : "arn:aws:logs:*:*:*",
+        "Effect" : "Allow"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "dynamodb:UpdateItem",
+          "dynamodb:GetItem"
+        ],
+        "Resource" : "arn:aws:dynamodb:*:*:table/cloud-resume"
+      },
+    ]
+  })
+}
+
+# attching the polict to the role using terraform resources.
+resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
+  role       = aws_iam_role.iam_for_lambda.name
+  policy_arn = aws_iam_policy.iam_policy_for_cloudresume.arn
+}
