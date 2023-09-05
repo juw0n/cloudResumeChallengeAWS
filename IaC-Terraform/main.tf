@@ -46,7 +46,9 @@ resource "aws_iam_policy" "dynamoDBLambdaPolicy_cloudResume" {
       {
         "Effect" : "Allow",
         "Action" : [
-          "dynamodb:*"
+          "dynamodb:UpdateItem",
+          "dynamodb:GetItem",
+          "dynamodb:PutItem"
         ],
         "Resource" : "arn:aws:dynamodb:*:*:table/cloudResumeViewsTable"
       },
@@ -85,7 +87,7 @@ resource "aws_lambda_function" "resumeViewCounter" {
   source_code_hash = data.archive_file.zip.output_base64sha256
   function_name    = "resumeViewCounter"
   role             = aws_iam_role.lambdaRole_cloudResume.arn
-  handler          = "lambdaFunc.handler"
+  handler          = "lambdaFunc.lambda_handler"
   runtime          = "python3.9"
 }
 
@@ -103,8 +105,8 @@ resource "aws_lambda_function_url" "resumeViewCounter_functionURL" {
 
   cors {
     allow_credentials = true
-    allow_origins     = ["*"]
-    allow_methods     = ["*"]
+    allow_origins     = ["https://resume.juwonlo.com"]
+    allow_methods     = ["GET", "POST"]
     allow_headers     = ["date", "keep-alive"]
     expose_headers    = ["keep-alive", "date"]
     max_age           = 86400

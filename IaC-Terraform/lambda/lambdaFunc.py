@@ -2,7 +2,7 @@ import json
 import boto3
 
 awsService = boto3.resource('dynamodb')
-table = awsService.Table('cloud-resume')
+table = awsService.Table('cloudResumeViewsTable')
 
 def lambda_handler(event, context):
     # TODO implement
