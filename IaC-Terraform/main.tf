@@ -85,7 +85,7 @@ resource "aws_lambda_function" "resumeViewCounter" {
   source_code_hash = data.archive_file.zip.output_base64sha256
   function_name    = "resumeViewCounter"
   role             = aws_iam_role.lambdaRole_cloudResume.arn
-  handler          = "lambdaFunction.handler"
+  handler          = "lambdaFunc.handler"
   runtime          = "python3.9"
 }
 
@@ -93,7 +93,7 @@ resource "aws_lambda_function" "resumeViewCounter" {
 data "archive_file" "zip" {
   type        = "zip"
   source_dir  = "${path.module}/lambda/"
-  output_path = "${path.module}/packedLambdaFunc.zip"
+  output_path = "${path.module}/packedLambda.zip"
 }
 
 # creating a function url for the lambda function
