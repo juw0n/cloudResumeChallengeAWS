@@ -43,8 +43,8 @@ resource "aws_lambda_function_url" "viewCounter_function_url" {
 
   cors {
     allow_credentials = true
-    allow_origins     = ["https://resume.juwonlo.com"]
-    allow_methods     = ["GET", "POST"]
+    allow_origins     = ["*"]
+    allow_methods     = ["*"]
     allow_headers     = ["date", "keep-alive"]
     expose_headers    = ["keep-alive", "date"]
     max_age           = 86400
@@ -61,6 +61,7 @@ resource "aws_iam_policy" "iam_policy_for_cloudresume" {
     Version = "2012-10-17",
     Statement = [
       {
+        "Effect" : "Allow",
         "Action" : [
           "logs: CreateLogGroup",
           "logs: CreateLogStream",
@@ -73,7 +74,8 @@ resource "aws_iam_policy" "iam_policy_for_cloudresume" {
         "Effect" : "Allow",
         "Action" : [
           "dynamodb:UpdateItem",
-          "dynamodb:GetItem"
+          "dynamodb:GetItem",
+          "dynamodb:PutItem"
         ],
         "Resource" : "arn:aws:dynamodb:*:*:table/cloud-resume"
       },
