@@ -1,1 +1,0 @@
-from lambdaFunc import lambda_handler

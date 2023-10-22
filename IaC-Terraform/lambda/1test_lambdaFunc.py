@@ -3,7 +3,7 @@ import pytest
 import boto3
 from moto import mock_dynamodb
 # Import the Lambda function from separate module
-from myLambdaFunc import lambda_handler
+# from myLambdaFunc import lambda_handler
 from lambdaFunc import lambda_handler
 
 
