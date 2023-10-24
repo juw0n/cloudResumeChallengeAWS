@@ -7,14 +7,14 @@ from lambdaFunc import lambda_handler
 @mock_dynamodb
 def test_lambda_handler():
     # Create a mock DynamoDB table
-    dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-    dynamodb.create_table(
+    dynamoDB = boto3.resource('dynamodb', region_name='us-east-1')
+    dynamoDB.create_table(
         TableName='cloudResumeViewsTable',
         KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
         AttributeDefinitions=[{'AttributeName': 'id', 'AttributeType': 'S'}],
         ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
     )
-    table = dynamodb.Table('cloudResumeViewsTable')
+    table = dynamoDB.Table('cloudResumeViewsTable')
     table.put_item(Item={'id': '1', 'views': 42})
 
     # Execute the Lambda function
