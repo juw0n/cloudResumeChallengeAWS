@@ -7,15 +7,15 @@ from lambdaFunc import lambda_handler
 @mock_dynamodb
 def test_lambda_handler():
     # Create a mock DynamoDB table
-    dynamoDB = boto3.resource('dynamodb', region_name='us-east-1')
-    dynamoDB.create_table(
+    awsService = boto3.resource('dynamodb', region_name='us-east-1')
+    awsService.create_table(
         TableName='cloudResumeViewsTable',
         KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
         AttributeDefinitions=[{'AttributeName': 'id', 'AttributeType': 'S'}],
         ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
     )
-    table = dynamoDB.Table('cloudResumeViewsTable')
-    table.put_item(Item={'id': '1', 'views': 42})
+    table = awsService.Table('cloudResumeViewsTable')
+    table.put_item(Item={'id': '1', 'views': 0})
 
     # Execute the Lambda function
     event = {}
@@ -23,7 +23,7 @@ def test_lambda_handler():
     result = lambda_handler(event, context)
 
     # Check the result
-    assert result == 43  # Expect the updated 'views' count
+    assert result == 1  # Expect the updated 'views' count
 
 if __name__ == '__main__':
     pytest.main()
