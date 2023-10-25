@@ -1,4 +1,4 @@
-name: CI/CD Pipeline- Test python script
+name: Test and Check lambda function
 
 on:
     push:
@@ -16,7 +16,7 @@ jobs:
             - name: Setup up python
               uses: actions/setup-python@v3
               with:
-                python-version: 3.10.12
+                python-version: 3.10.x
 
             - name: Install dependencies
               run: pip3 install boto3 moto pytest
