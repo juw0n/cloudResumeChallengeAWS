@@ -5,7 +5,8 @@ from moto import mock_aws #update for mock_dynamodb
 import boto3
 from lambdaFunc import lambda_handler
 
-@mock_dynamodb
+# @mock_dynamodb
+@mock_aws
 def test_lambda_handler():
     # Create a mock DynamoDB table
     awsService = boto3.resource('dynamodb', region_name='us-east-1')
