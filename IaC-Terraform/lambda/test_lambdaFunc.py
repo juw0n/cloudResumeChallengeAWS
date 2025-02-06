@@ -1,6 +1,7 @@
 import json
 import pytest
 from moto import mock_dynamodb
+from moto import mock_aws #update for mock_dynamodb
 import boto3
 from lambdaFunc import lambda_handler
 
