@@ -74,7 +74,6 @@ func contactFormHandler(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{"message": "Email sent successfully!"})
-
 }
 
 func main() {
